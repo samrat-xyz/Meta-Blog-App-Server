@@ -5,10 +5,12 @@ dotenv.config();
 const cors = require("cors");
 const port = process.env.PORT || 3030;
 const app = express();
+app.use(express.json())
+app.use(cors())
 
 // routes
-const blogRoutes = require('./src/routes/blog.routes')
-app.use('/blogs',blogRoutes)
+const blogRoutes = require("./src/routes/blog.route");
+app.use("/blogs", blogRoutes);
 
 async function main() {
   await mongoose.connect(process.env.DB_URI);
