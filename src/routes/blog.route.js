@@ -3,23 +3,21 @@ const BlogModel = require("../models/blog.model");
 
 const router = express.Router();
 
-router.get('/',async(req,res)=>{
+router.get("/", async (req, res) => {
   try {
-    const blogs = await BlogModel.find()
+    const blogs = await BlogModel.find().sort({ createdAt: -1 });
     res.status(200).json({
-      success:true,
-      message:"successfully blogs data fetch",
-      blogs
-    })
-    
+      success: true,
+      message: "successfully blogs data fetch",
+      blogs,
+    });
   } catch (error) {
     res.status(204).json({
-      success:false,
-      message:"No Data Found"
-    })
+      success: false,
+      message: "No Data Found",
+    });
   }
-})
-
+});
 
 router.post("/add-blogs", async (req, res) => {
   try {
@@ -39,6 +37,5 @@ router.post("/add-blogs", async (req, res) => {
     });
   }
 });
-
 
 module.exports = router;

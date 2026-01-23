@@ -20,7 +20,12 @@ const BlogSchema = new mongoose.Schema(
       required: true,
     },
     author: AuthorSchema,
+    createdAt:{
+      type:Date,
+      default: Date.now
+    }
   },
+  
   {
     timestamps: true,
   }
