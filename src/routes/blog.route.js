@@ -3,6 +3,24 @@ const BlogModel = require("../models/blog.model");
 
 const router = express.Router();
 
+router.get('/',async(req,res)=>{
+  try {
+    const blogs = await BlogModel.find()
+    res.status(200).json({
+      success:true,
+      message:"successfully blogs data fetch",
+      blogs
+    })
+    
+  } catch (error) {
+    res.status(204).json({
+      success:false,
+      message:"No Data Found"
+    })
+  }
+})
+
+
 router.post("/add-blogs", async (req, res) => {
   try {
     const newBlog = new BlogModel(req.body);
@@ -21,5 +39,6 @@ router.post("/add-blogs", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
